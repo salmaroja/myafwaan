@@ -8,10 +8,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/staff")
-@CrossOrigin(origins = "*") // Ruhusu API ipatikane kwenye frontend yoyote
+//@CrossOrigin(origins = "*") // Ruhusu API ipatikane kwenye frontend yoyote
 public class StaffController {
 
     @Autowired
@@ -49,4 +50,10 @@ public class StaffController {
         staffService.deleteStaff(id);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/dashboard/summary")
+    public ResponseEntity<Map<String, Object>> getDashboardSummary() {
+        Map<String, Object> summary = staffService.getDashboardSummary();
+        return ResponseEntity.ok(summary);
+    }
+
 }

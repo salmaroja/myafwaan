@@ -1,91 +1,59 @@
 package com.zawadig.myafwanii.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "bill")
 public class Bill {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String meterNumber;
-    private Double amount;
-    private LocalDate billingDate;
-    private boolean paid;
-
-    private LocalDate dueDate;
-
+    // Mahusiano na Customer
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Customer customer;
 
-    // Constructors
-    public Bill() {}
+    private Double amount;
 
-    public Bill(String meterNumber, Double amount, LocalDate billingDate, boolean paid) {
-        this.meterNumber = meterNumber;
-        this.amount = amount;
-        this.billingDate = billingDate;
-        this.paid = paid;
-    }
+    @Column(name = "billing_date")
+    private LocalDate billingDate;
+
+    @Column(name = "due_date")
+    private LocalDate dueDate;
+
+    private String status;
+
+    @Column(name = "meter_number")
+    private String meterNumber;
+
+    private Boolean paid;
 
     // Getters & Setters
-    public Long getId() {
-        return id;
-    }
 
-    public String getMeterNumber() {
-        return meterNumber;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setMeterNumber(String meterNumber) {
-        this.meterNumber = meterNumber;
-    }
+    public Customer getCustomer() { return customer; }
+    public void setCustomer(Customer customer) { this.customer = customer; }
 
-    public Double getAmount() {
-        return amount;
-    }
+    public Double getAmount() { return amount; }
+    public void setAmount(Double amount) { this.amount = amount; }
 
-    public void setAmount(Double amount) {
-        this.amount = amount;
-    }
+    public LocalDate getBillingDate() { return billingDate; }
+    public void setBillingDate(LocalDate billingDate) { this.billingDate = billingDate; }
 
-    public LocalDate getBillingDate() {
-        return billingDate;
-    }
+    public LocalDate getDueDate() { return dueDate; }
+    public void setDueDate(LocalDate dueDate) { this.dueDate = dueDate; }
 
-    public void setBillingDate(LocalDate billingDate) {
-        this.billingDate = billingDate;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
-    public boolean isPaid() {
-        return paid;
-    }
+    public String getMeterNumber() { return meterNumber; }
+    public void setMeterNumber(String meterNumber) { this.meterNumber = meterNumber; }
 
-    public void setPaid(boolean paid) {
-        this.paid = paid;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
-
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    public void setId(Long billid ) {
-    }
+    public Boolean getPaid() { return paid; }
+    public void setPaid(Boolean paid) { this.paid = paid; }
 }

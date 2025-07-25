@@ -1,71 +1,432 @@
+////package com.zawadig.myafwanii.Model;
+////
+////import jakarta.persistence.*;
+////import java.time.LocalDateTime;
+////
+////@Entity
+////@Table(name = "payment")
+////public class Payment {
+////
+////    @Id
+////    @GeneratedValue(strategy = GenerationType.IDENTITY)
+////    private Long id;
+////
+////    private Double amountPaid;
+////
+////    @Column(name = "created_at")
+////    private LocalDateTime createdAt;
+////
+////    @Column(name = "payment_date", nullable = false)
+////    private LocalDateTime paymentDate;
+////
+////    @Column(name = "payment_method", nullable = false, length = 50)
+////    private String paymentMethod;
+////
+////    @Column(name = "payment_status", nullable = false, length = 255)
+////    private String paymentStatus;
+////
+////    @Column(name = "updated_at")
+////    private LocalDateTime updatedAt;
+////
+////    @Column(name = "bill_id", nullable = false)
+////    private Long billId;
+////
+////    @Column(name = "control_number", unique = true, length = 255)
+////    private String controlNumber;
+////
+////    @Column(name = "customer_id")
+////    private Long customerId;
+////
+////    @Column(name = "meter_number", length = 255)
+////    private String meterNumber;
+////
+////    // Getters and Setters
+////    public Long getId() {
+////        return id;
+////    }
+////
+////    public void setId(Long id) {
+////        this.id = id;
+////    }
+////
+////    public Double getAmountPaid() {
+////        return amountPaid;
+////    }
+////
+////    public void setAmountPaid(Double amountPaid) {
+////        this.amountPaid = amountPaid;
+////    }
+////
+////    public LocalDateTime getCreatedAt() {
+////        return createdAt;
+////    }
+////
+////    public void setCreatedAt(LocalDateTime createdAt) {
+////        this.createdAt = createdAt;
+////    }
+////
+////    public LocalDateTime getPaymentDate() {
+////        return paymentDate;
+////    }
+////
+////    public void setPaymentDate(LocalDateTime paymentDate) {
+////        this.paymentDate = paymentDate;
+////    }
+////
+////    public String getPaymentMethod() {
+////        return paymentMethod;
+////    }
+////
+////    public void setPaymentMethod(String paymentMethod) {
+////        this.paymentMethod = paymentMethod;
+////    }
+////
+////    public String getPaymentStatus() {
+////        return paymentStatus;
+////    }
+////
+////    public void setPaymentStatus(String paymentStatus) {
+////        this.paymentStatus = paymentStatus;
+////    }
+////
+////    public LocalDateTime getUpdatedAt() {
+////        return updatedAt;
+////    }
+////
+////    public void setUpdatedAt(LocalDateTime updatedAt) {
+////        this.updatedAt = updatedAt;
+////    }
+////
+////    public Long getBillId() {
+////        return billId;
+////    }
+////
+////    public void setBillId(Long billId) {
+////        this.billId = billId;
+////    }
+////
+////    public String getControlNumber() {
+////        return controlNumber;
+////    }
+////
+////    public void setControlNumber(String controlNumber) {
+////        this.controlNumber = controlNumber;
+////    }
+////
+////    public Long getCustomerId() {
+////        return customerId;
+////    }
+////
+////    public void setCustomerId(Long customerId) {
+////        this.customerId = customerId;
+////    }
+////
+////    public String getMeterNumber() {
+////        return meterNumber;
+////    }
+////
+////    public void setMeterNumber(String meterNumber) {
+////        this.meterNumber = meterNumber;
+////    }
+////}
+//package com.zawadig.myafwanii.Model;
+//
+//import jakarta.persistence.*;
+//import java.time.LocalDateTime;
+//
+//@Entity
+//@Table(name = "payment")
+//public class Payment {
+//
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+//
+//    private Double amountPaid;
+//
+//    @Column(name = "created_at")
+//    private LocalDateTime createdAt;
+//
+//    @Column(name = "payment_date", nullable = false)
+//    private LocalDateTime paymentDate;
+//
+//    @Column(name = "payment_method", nullable = false, length = 50)
+//    private String paymentMethod;
+//
+//    @Column(name = "payment_status", nullable = false, length = 255)
+//    private String paymentStatus;
+//
+//    @Column(name = "updated_at")
+//    private LocalDateTime updatedAt;
+//
+//    @Column(name = "bill_id", nullable = false)
+//    private Long billId;
+//
+//    @Column(name = "control_number", unique = true, length = 255)
+//    private String controlNumber;
+//
+//    @Column(name = "customer_id")
+//    private Long customerId;
+//
+//    @Column(name = "meter_number", length = 255)
+//    private String meterNumber;
+//
+//    // Add ManyToOne relation to Customer (optional but recommended)
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
+//    private Customer customer;
+//
+//    // Getters and Setters for all fields (including customer)
+//
+//    public Long getId() { return id; }
+//    public void setId(Long id) { this.id = id; }
+//
+//    public Double getAmountPaid() { return amountPaid; }
+//    public void setAmountPaid(Double amountPaid) { this.amountPaid = amountPaid; }
+//
+//    public LocalDateTime getCreatedAt() { return createdAt; }
+//    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+//
+//    public LocalDateTime getPaymentDate() { return paymentDate; }
+//    public void setPaymentDate(LocalDateTime paymentDate) { this.paymentDate = paymentDate; }
+//
+//    public String getPaymentMethod() { return paymentMethod; }
+//    public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
+//
+//    public String getPaymentStatus() { return paymentStatus; }
+//    public void setPaymentStatus(String paymentStatus) { this.paymentStatus = paymentStatus; }
+//
+//    public LocalDateTime getUpdatedAt() { return updatedAt; }
+//    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+//
+//    public Long getBillId() { return billId; }
+//    public void setBillId(Long billId) { this.billId = billId; }
+//
+//    public String getControlNumber() { return controlNumber; }
+//    public void setControlNumber(String controlNumber) { this.controlNumber = controlNumber; }
+//
+//    public Long getCustomerId() { return customerId; }
+//    public void setCustomerId(Long customerId) { this.customerId = customerId; }
+//
+//    public String getMeterNumber() { return meterNumber; }
+//    public void setMeterNumber(String meterNumber) { this.meterNumber = meterNumber; }
+//
+//    public Customer getCustomer() { return customer; }
+//    public void setCustomer(Customer customer) { this.customer = customer; }
+//}
+
+//package com.zawadig.myafwanii.Model;
+//
+//import jakarta.persistence.*;
+//import java.time.LocalDateTime;
+//
+//@Entity
+//@Table(name = "payment")
+//public class Payment {
+//
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+//
+//    private Double amountPaid;
+//
+//    @Column(name = "created_at")
+//    private LocalDateTime createdAt;
+//
+//    @Column(name = "payment_date", nullable = false)
+//    private LocalDateTime paymentDate;
+//
+//    @Column(name = "payment_method", nullable = false, length = 50)
+//    private String paymentMethod;
+//
+//    @Column(name = "payment_status", nullable = false, length = 255)
+//    private String paymentStatus;
+//
+//    @Column(name = "updated_at")
+//    private LocalDateTime updatedAt;
+//
+//    @Column(name = "bill_id", nullable = false)
+//    private Long billId;
+//
+//    @Column(name = "control_number", unique = true, length = 255)
+//    private String controlNumber;
+//
+//    @Column(name = "customer_id")
+//    private Long customerId;
+//
+//    @Column(name = "meter_number", length = 255)
+//    private String meterNumber;
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "customer_id", insertable = false, updatable = false)
+//    private Customer customer;
+//
+//    // ===== Soft Delete Fields =====
+//    @Column(nullable = false)
+//    private boolean deleted = false;
+//
+//    private LocalDateTime deletedAt;
+//
+//    private String deletedBy;
+//
+//    // ===== Getters and Setters =====
+//
+//    public Long getId() { return id; }
+//    public void setId(Long id) { this.id = id; }
+//
+//    public Double getAmountPaid() { return amountPaid; }
+//    public void setAmountPaid(Double amountPaid) { this.amountPaid = amountPaid; }
+//
+//    public LocalDateTime getCreatedAt() { return createdAt; }
+//    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+//
+//    public LocalDateTime getPaymentDate() { return paymentDate; }
+//    public void setPaymentDate(LocalDateTime paymentDate) { this.paymentDate = paymentDate; }
+//
+//    public String getPaymentMethod() { return paymentMethod; }
+//    public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
+//
+//    public String getPaymentStatus() { return paymentStatus; }
+//    public void setPaymentStatus(String paymentStatus) { this.paymentStatus = paymentStatus; }
+//
+//    public LocalDateTime getUpdatedAt() { return updatedAt; }
+//    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+//
+//    public Long getBillId() { return billId; }
+//    public void setBillId(Long billId) { this.billId = billId; }
+//
+//    public String getControlNumber() { return controlNumber; }
+//    public void setControlNumber(String controlNumber) { this.controlNumber = controlNumber; }
+//
+//    public Long getCustomerId() { return customerId; }
+//    public void setCustomerId(Long customerId) { this.customerId = customerId; }
+//
+//    public String getMeterNumber() { return meterNumber; }
+//    public void setMeterNumber(String meterNumber) { this.meterNumber = meterNumber; }
+//
+//    public Customer getCustomer() { return customer; }
+//    public void setCustomer(Customer customer) { this.customer = customer; }
+//
+//    // ===== Soft Delete Getters & Setters =====
+//    public boolean isDeleted() { return deleted; }
+//    public void setDeleted(boolean deleted) { this.deleted = deleted; }
+//
+//    public LocalDateTime getDeletedAt() { return deletedAt; }
+//    public void setDeletedAt(LocalDateTime deletedAt) { this.deletedAt = deletedAt; }
+//
+//    public String getDeletedBy() { return deletedBy; }
+//    public void setDeletedBy(String deletedBy) { this.deletedBy = deletedBy; }
+//}
 package com.zawadig.myafwanii.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "payment")
-@Getter
-@Setter
-@NoArgsConstructor
 public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bill_id", nullable = false)
-    @NotNull(message = "Bill must be provided")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Bill bill;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customer_id")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    private Customer customer;
-
-    @NotNull(message = "Amount paid is required")
-    @Positive(message = "Amount paid must be positive")
-    @Column(name = "amount_paid")
     private Double amountPaid;
 
-    @Column(name = "payment_date", nullable = false)
-    private LocalDateTime paymentDate = LocalDateTime.now();
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
-    @NotNull(message = "Payment method is required")
-    @Size(min = 2, max = 50, message = "Payment method must be between 2 and 50 characters")
-    @Column(name = "payment_method")
+    @Column(name = "payment_date", nullable = false)
+    private LocalDateTime paymentDate;
+
+    @Column(name = "payment_method", nullable = false, length = 50)
     private String paymentMethod;
 
-    @Column(name = "payment_status", nullable = false)
-    private String paymentStatus = "COMPLETED";
-
-    @Column(name = "control_number", unique = true)
-    private String controlNumber;
-
-    @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
+    @Column(name = "payment_status", nullable = false, length = 255)
+    private String paymentStatus;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @Column(name = "bill_id", nullable = false)
+    private Long billId;
+
+    @Column(name = "control_number", unique = true, length = 255)
+    private String controlNumber;
+
+    @Column(name = "customer_id", nullable = false)
+    private Long customerId;
+
+    @Column(name = "meter_number", length = 255)
+    private String meterNumber;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Customer customer;
+
+    // ===== Soft Delete Fields =====
+    @Column(nullable = false)
+    private boolean deleted = false;
+
+    private LocalDateTime deletedAt;
+
+    private String deletedBy;
+
+    // ==== Hooks ====
     @PrePersist
     protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
+        this.createdAt = LocalDateTime.now();
+        this.paymentDate = (this.paymentDate == null) ? LocalDateTime.now() : this.paymentDate;
+        this.paymentStatus = (this.paymentStatus == null) ? "PENDING" : this.paymentStatus;
     }
 
     @PreUpdate
     protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
     }
+
+    // ===== Getters and Setters =====
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public Double getAmountPaid() { return amountPaid; }
+    public void setAmountPaid(Double amountPaid) { this.amountPaid = amountPaid; }
+
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+    public LocalDateTime getPaymentDate() { return paymentDate; }
+    public void setPaymentDate(LocalDateTime paymentDate) { this.paymentDate = paymentDate; }
+
+    public String getPaymentMethod() { return paymentMethod; }
+    public void setPaymentMethod(String paymentMethod) { this.paymentMethod = paymentMethod; }
+
+    public String getPaymentStatus() { return paymentStatus; }
+    public void setPaymentStatus(String paymentStatus) { this.paymentStatus = paymentStatus; }
+
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
+
+    public Long getBillId() { return billId; }
+    public void setBillId(Long billId) { this.billId = billId; }
+
+    public String getControlNumber() { return controlNumber; }
+    public void setControlNumber(String controlNumber) { this.controlNumber = controlNumber; }
+
+    public Long getCustomerId() { return customerId; }
+    public void setCustomerId(Long customerId) { this.customerId = customerId; }
+
+    public String getMeterNumber() { return meterNumber; }
+    public void setMeterNumber(String meterNumber) { this.meterNumber = meterNumber; }
+
+    public Customer getCustomer() { return customer; }
+    public void setCustomer(Customer customer) { this.customer = customer; }
+
+    public boolean isDeleted() { return deleted; }
+    public void setDeleted(boolean deleted) { this.deleted = deleted; }
+
+    public LocalDateTime getDeletedAt() { return deletedAt; }
+    public void setDeletedAt(LocalDateTime deletedAt) { this.deletedAt = deletedAt; }
+
+    public String getDeletedBy() { return deletedBy; }
+    public void setDeletedBy(String deletedBy) { this.deletedBy = deletedBy; }
 }

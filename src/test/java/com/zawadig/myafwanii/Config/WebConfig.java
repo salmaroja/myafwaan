@@ -14,8 +14,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
                     .allowedOriginPatterns(
                             "http://localhost:3000",
                             "http://localhost:19006",
-                            "http://10.3.2.95:19006",
-                            "http://10.3.2.95:8081"
+                            "http://10.8.5.173:19006",
+                            "http://10.8.5.173:8081"
                     )
                     .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                     .allowedHeaders("*")

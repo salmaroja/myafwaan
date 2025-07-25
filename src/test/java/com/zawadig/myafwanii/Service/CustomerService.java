@@ -1,76 +1,158 @@
+////////package com.zawadig.myafwanii.Service;
+////////
+////////import com.zawadig.myafwanii.Model.Customer;
+////////import java.util.List;
+////////import java.util.Optional;
+////////
+////////public interface CustomerService {
+////////
+////////    Customer saveCustomer(Customer customer) throws IllegalArgumentException;
+////////
+////////    Customer authenticate(String email, String password) throws Exception;
+////////
+////////    Optional<Customer> getCustomerById(Long id);
+////////
+////////    Customer updateCustomer(Customer updatedData, Long id) throws Exception;
+////////
+////////    List<Customer> getAllCustomers();
+////////
+////////    void deleteCustomer(Long id) throws Exception;
+////////
+////////    Customer updateCustomerStatus(Long id, String status) throws Exception;
+////////}
+//////package com.zawadig.myafwanii.Service;
+//////
+//////import com.zawadig.myafwanii.Model.Customer;
+//////import com.zawadig.myafwanii.dto.CustomerDTO;
+//////import java.util.List;
+//////import java.util.Optional;
+//////
+//////public interface CustomerService {
+//////
+//////    Customer saveCustomer(Customer customer) throws IllegalArgumentException;
+//////
+//////    Customer authenticate(String email, String password) throws Exception;
+//////
+//////    Optional<Customer> getCustomerById(Long id);
+//////
+//////    Customer updateCustomer(Customer updatedData, Long id) throws Exception;
+//////
+//////    List<Customer> getAllCustomers();
+//////
+//////    void deleteCustomer(Long id) throws Exception;
+//////
+//////    Customer updateCustomerStatus(Long id, String status) throws Exception;
+//////
+//////    // Method mpya ili ku-create Customer na ku-link User kwa userId
+//////    Customer createCustomer(CustomerDTO dto) throws RuntimeException;
+//////}
+////package com.zawadig.myafwanii.Service;
+////
+////import com.zawadig.myafwanii.Model.Customer;
+////import com.zawadig.myafwanii.dto.CustomerDTO;
+////
+////import java.util.List;
+////import java.util.Optional;
+////
+////public interface CustomerService {
+////
+////    Customer saveCustomer(Customer customer) throws IllegalArgumentException;
+////
+////    Customer authenticate(String email, String password) throws Exception;
+////
+////    Optional<Customer> getCustomerById(Long id);
+////
+////    Customer updateCustomer(Customer updatedData, Long id) throws Exception;
+////
+////    List<Customer> getAllCustomers();
+////
+////    void deleteCustomer(Long id) throws Exception;
+////
+////    Customer updateCustomerStatus(Long id, String status) throws Exception;
+////
+////    Customer createCustomer(CustomerDTO dto) throws RuntimeException;
+////}
+//package com.zawadig.myafwanii.Service;
+//
+//import com.zawadig.myafwanii.Model.Customer;
+//import com.zawadig.myafwanii.dto.CustomerDTO;
+//
+//import java.util.List;
+//import java.util.Optional;
+//
+//public interface CustomerService {
+//
+//    Customer saveCustomer(Customer customer) throws IllegalArgumentException;
+//
+//    Customer authenticate(String email, String password) throws Exception;
+//
+//    Optional<Customer> getCustomerById(Long id);
+//
+//    Customer updateCustomer(Customer updatedData, Long id) throws Exception;
+//
+//    List<Customer> getAllCustomers();
+//
+//    void deleteCustomer(Long id) throws Exception;
+//
+//    Customer updateCustomerStatus(Long id, String status) throws Exception;
+//
+//    Customer createCustomer(CustomerDTO dto) throws RuntimeException;
+//}
+//package com.zawadig.myafwanii.Service;
+//
+//import com.zawadig.myafwanii.Model.Customer;
+//import com.zawadig.myafwanii.dto.CustomerDTO;
+//
+//import java.util.List;
+//import java.util.Optional;
+//
+//public interface CustomerService {
+//
+//    Customer saveCustomer(Customer customer) throws IllegalArgumentException;
+//
+//    Customer authenticate(String email, String password) throws Exception;
+//
+//    Optional<Customer> getCustomerById(Long id);
+//
+//    Customer updateCustomer(Customer updatedData, Long id) throws Exception;
+//
+//    List<Customer> getAllCustomers();
+//
+//    void deleteCustomer(Long id) throws Exception;
+//
+//    Customer updateCustomerStatus(Long id, String status) throws Exception;
+//
+//    Customer createCustomer(CustomerDTO dto) throws RuntimeException;
+//}
 package com.zawadig.myafwanii.Service;
 
 import com.zawadig.myafwanii.Model.Customer;
-import com.zawadig.myafwanii.Repository.CustomerRepository;
-import com.zawadig.myafwanii.Util.ControlNumberGenerator;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.zawadig.myafwanii.dto.CustomerDTO;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class CustomerService {
+public interface CustomerService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
+    Customer saveCustomer(Customer customer) throws IllegalArgumentException;
 
-    // Ondoa PasswordEncoder kabisa
+    Customer authenticate(String email, String password) throws Exception;
 
-    public Customer saveCustomer(Customer customer) {
-        // Hapa password hutahifadhiwa plain text (HAKUKUMBIKI)
-        // Ikiwa unataka encrypt, re-add PasswordEncoder na encode hapa
-        // Lakini kwa sasa tuta-save plain password
-        // (Kumbuka, hii sio salama kwa production!)
+    Optional<Customer> getCustomerById(Long id);
 
-        // Hakikisha unahakikisha frontend inatuma password salama (e.g. HTTPS)
+    Customer updateCustomer(Customer updatedData, Long id) throws Exception;
 
-        if (customer.getPassword() == null || customer.getPassword().isEmpty()) {
-            throw new IllegalArgumentException("Password cannot be empty");
-        }
+    List<Customer> getAllCustomers();
 
-        // Save password as-is (plain text)
-        // customer.setPassword(customer.getPassword()); // hii ni optional, kwa plain text
+    void deleteCustomer(Long id) throws Exception;
 
-        // Angalia kama meter number bado haipo
-        if (customer.getMeterNumber() == null || customer.getMeterNumber().isEmpty()) {
-            customer.setMeterNumber(ControlNumberGenerator.generateMeterNumber());
-        }
+    Customer updateCustomerStatus(Long id, String status) throws Exception;
 
-        return customerRepository.save(customer);
-    }
+    Customer createCustomer(CustomerDTO dto) throws RuntimeException;
 
-    public List<Customer> getAllCustomers() {
-        return customerRepository.findAll();
-    }
+    // ✅ Method mpya ya ku-save customer bila meter number
+    Customer saveCustomerWithoutMeter(Customer dto) throws RuntimeException;
 
-    public Optional<Customer> getCustomerById(Long id) {
-        return customerRepository.findById(id);
-    }
-
-    public Customer updateCustomer(Customer customer, Long id) {
-        customer.setId(id);
-        return customerRepository.save(customer);
-    }
-
-    public void deleteCustomer(Long id) {
-        customerRepository.deleteById(id);
-    }
-
-    public long countCustomers() {
-        return customerRepository.count();
-    }
-
-    // Authenticate method: plain text password comparison
-    public Customer authenticate(String email, String rawPassword) throws Exception {
-        Customer customer = customerRepository.findByEmail(email)
-                .orElseThrow(() -> new Exception("User not found"));
-
-        // Plain text comparison (SI salama, lakini itafanya kazi sasa)
-        if (!rawPassword.equals(customer.getPassword())) {
-            throw new Exception("Invalid password");
-        }
-
-        return customer;
-    }
+    // Save customer without meter number (usajili wa awali, meter number itatolewa baadaye)
+    Customer saveCustomerWithoutMeter(CustomerDTO dto) throws RuntimeException;
 }

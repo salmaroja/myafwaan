@@ -5,8 +5,6 @@ import com.zawadig.myafwanii.Model.Customer;
 import com.zawadig.myafwanii.Model.User;
 import com.zawadig.myafwanii.Repository.CustomerRepository;
 import com.zawadig.myafwanii.Repository.UserRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -14,40 +12,40 @@ import java.util.UUID;
 @Service
 public class AuthService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final CustomerRepository customerRepository;
 
-    @Autowired
-    private CustomerRepository customerRepository;
-
-    // Ondoa PasswordEncoder
+    public AuthService(UserRepository userRepository, CustomerRepository customerRepository) {
+        this.userRepository = userRepository;
+        this.customerRepository = customerRepository;
+    }
 
     public String register(CustomerRegisterRequest request) {
-        // Angalia kama email imesajiliwa
+        // Angalia kama email tayari imejisajili
         if (userRepository.existsByEmail(request.getEmail())) {
             return "Email already registered!";
         }
 
-        // Step 1: Create and save User
+        // Tengeneza User
         User user = new User();
         user.setEmail(request.getEmail());
 
-        // Hifadhi password kama plain text (HAKUKUMBIKI!)
+        // Password is stored as plain text here, bad practice for production!
         user.setPassword(request.getPassword());
 
         user.setRole("CUSTOMER");
+
         User savedUser = userRepository.save(user);
 
-        // Step 2: Generate meter number
+        // Generate meter number
         String meterNumber = "ZAWA-" + UUID.randomUUID().toString().substring(0, 8).toUpperCase();
 
-        // Step 3: Create and save Customer
+        // Tengeneza Customer
         Customer customer = new Customer();
-        customer.setName(request.getName());
+//        customer.setFullName(request.getName());
         customer.setEmail(request.getEmail());
         customer.setPhone(request.getPhone());
         customer.setAddress(request.getAddress());
-        customer.setPassword(null); // au weka sawa na user password kama unavyotaka
         customer.setMeterNumber(meterNumber);
         customer.setUser(savedUser);
 
