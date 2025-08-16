@@ -22,5 +22,10 @@ public class LoginResponse {
     public String getEmail() {
         return email;
     }
-}
 
+    public class PasswordResetRequest {
+        private String email;
+        private String oldPassword;
+        private String newPassword;
+    }
+}

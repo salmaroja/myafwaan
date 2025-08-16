@@ -55,13 +55,40 @@
 //}
 //
 // NotificationService.java
+//package com.zawadig.myafwanii.Service;
+//
+//import com.sun.nio.sctp.Notification;
+//
+//import java.util.List;
+//
+//public interface NotificationService {
+//    void sendNotification(Long customerId, String title, String message);
+//    List<Notification> getNotificationsForCustomer(Long customerId);
+//}
+
+
+
 package com.zawadig.myafwanii.Service;
 
+import com.zawadig.myafwanii.Model.Customer;
 import com.zawadig.myafwanii.Model.Notification;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public interface NotificationService {
-    void sendNotification(Long customerId, String title, String message);
     List<Notification> getNotificationsForCustomer(Long customerId);
+    void sendNotification(Long customerId, String title, String message);
+
+    void sendNotificationToCustomer(Customer customer, String subject, String plainMessage);
+
+    List<Notification> getNotificationsForTechnician(Long technicianId);
+
+    List<Notification> getNotificationsForAdmin(Long adminId);
+
+    void markAsRead(Long notificationId);
+
+    void deleteNotification(Long notificationId);
+
+    List<Notification> getUnreadNotifications(Long customerId);
 }

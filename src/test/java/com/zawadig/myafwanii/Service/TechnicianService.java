@@ -39,7 +39,9 @@ public class TechnicianService {
             existing.setUsername(updated.getUsername());
             existing.setPassword(updated.getPassword());
             existing.setEnabled(updated.isEnabled());
-//            existing.setRoles(updated.getRoles(updated.getRole()));
+            // Ikiwa unataka update roles, fanya hivyo hapa
+            // existing.setRoles(updated.getRoles());
+
             return technicianRepository.save(existing);
         }
         return null;

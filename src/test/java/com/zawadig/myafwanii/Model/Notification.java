@@ -1,39 +1,618 @@
+////////////////package com.zawadig.myafwanii.Model;
+////////////////
+////////////////
+////////////////
+////////////////
+////////////////import jakarta.persistence.*;
+////////////////import java.time.LocalDateTime;
+////////////////
+////////////////@Entity
+////////////////public class Notification {
+////////////////
+////////////////    @Id
+////////////////    @GeneratedValue(strategy = GenerationType.IDENTITY)
+////////////////    private Long id;
+////////////////
+////////////////    private String title;
+////////////////    private String message;
+////////////////
+////////////////    @Column(name = "`read`")
+////////////////    private boolean read = false;
+////////////////
+////////////////    private LocalDateTime timestamp;
+////////////////
+////////////////    @ManyToOne
+////////////////    @JoinColumn(name = "customer_id")
+////////////////    private Customer customer;
+////////////////
+////////////////    @PrePersist
+////////////////    public void prePersist() {
+////////////////        this.timestamp = LocalDateTime.now();
+////////////////    }
+////////////////
+////////////////    // Getters & Setters
+////////////////
+////////////////    public Long getId() {
+////////////////        return id;
+////////////////    }
+////////////////
+////////////////    public String getTitle() {
+////////////////        return title;
+////////////////    }
+////////////////
+////////////////    public void setTitle(String title) {
+////////////////        this.title = title;
+////////////////    }
+////////////////
+////////////////    public String getMessage() {
+////////////////        return message;
+////////////////    }
+////////////////
+////////////////    public void setMessage(String message) {
+////////////////        this.message = message;
+////////////////    }
+////////////////
+////////////////    public boolean isRead() {
+////////////////        return read;
+////////////////    }
+////////////////
+////////////////    public void setRead(boolean read) {
+////////////////        this.read = read;
+////////////////    }
+////////////////
+////////////////    public LocalDateTime getTimestamp() {
+////////////////        return timestamp;
+////////////////    }
+////////////////
+////////////////    public Customer getCustomer() {
+////////////////        return customer;
+////////////////    }
+////////////////
+////////////////    public void setCustomer(Customer customer) {
+////////////////        this.customer = customer;
+////////////////    }
+////////////////}
+//////////////// Notification.java
+//////package com.zawadig.myafwanii.Model;
+//////
+//////import jakarta.persistence.*;
+//////import java.time.LocalDateTime;
+//////
+//////@Entity
+//////@Table(name = "notification")
+//////public class Notification {
+//////
+//////    @Id
+//////    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//////    private Long id;
+//////
+//////    @Column(name = "customer_id")
+//////    private Long customerId;
+//////
+//////    private String title;
+//////    private String message;
+//////
+//////    @Column(name = "`read`") // ✅ fix keyword issue
+//////    private boolean read = false;
+//////
+//////    @Column(name = "created_at")
+//////    private LocalDateTime createdAt;
+//////
+//////    // Getters & Setters
+//////
+//////    public Long getId() {
+//////        return id;
+//////    }
+//////
+//////    public void setId(Long id) {
+//////        this.id = id;
+//////    }
+//////
+//////    public Long getCustomerId() {
+//////        return customerId;
+//////    }
+//////
+//////    public void setCustomerId(Long customerId) {
+//////        this.customerId = customerId;
+//////    }
+//////
+//////    public String getTitle() {
+//////        return title;
+//////    }
+//////
+//////    public void setTitle(String title) {
+//////        this.title = title;
+//////    }
+//////
+//////    public String getMessage() {
+//////        return message;
+//////    }
+//////
+//////    public void setMessage(String message) {
+//////        this.message = message;
+//////    }
+//////
+//////    public boolean isRead() {
+//////        return read;
+//////    }
+//////
+//////    public void setRead(boolean read) {
+//////        this.read = read;
+//////    }
+//////
+//////    public LocalDateTime getCreatedAt() {
+//////        return createdAt;
+//////    }
+//////
+//////    public void setCreatedAt(LocalDateTime createdAt) {
+//////        this.createdAt = createdAt;
+//////    }
+//////}
+//////package com.zawadig.myafwanii.Model;
+//////
+//////import jakarta.persistence.*;
+//////import java.time.LocalDateTime;
+//////
+//////@Entity
+//////@Table(name = "notification")
+//////public class Notification {
+//////
+//////    @Id
+//////    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//////    private Long id;
+//////
+//////    @Column(name = "customer_id")
+//////    private Long customerId;
+//////
+//////    private String title;
+//////    private String message;
+//////
+//////    @Column(name = "`read`") // escape SQL keyword
+//////    private boolean read = false;
+//////
+//////    @Column(name = "created_at")
+//////    private LocalDateTime createdAt;
+//////
+//////    public static Object builder() {
+//////
+//////    }
+//////
+//////    @PrePersist
+//////    public void prePersist() {
+//////        this.createdAt = LocalDateTime.now();
+//////    }
+//////
+//////    // Getters & Setters
+//////    public Long getId() {
+//////        return id;
+//////    }
+//////    public void setId(Long id) {
+//////        this.id = id;
+//////    }
+//////
+//////    public Long getCustomerId() {
+//////        return customerId;
+//////    }
+//////    public void setCustomerId(Long customerId) {
+//////        this.customerId = customerId;
+//////    }
+//////
+//////    public String getTitle() {
+//////        return title;
+//////    }
+//////    public void setTitle(String title) {
+//////        this.title = title;
+//////    }
+//////
+//////    public String getMessage() {
+//////        return message;
+//////    }
+//////    public void setMessage(String message) {
+//////        this.message = message;
+//////    }
+//////
+//////    public boolean isRead() {
+//////        return read;
+//////    }
+//////    public void setRead(boolean read) {
+//////        this.read = read;
+//////    }
+//////
+//////    public LocalDateTime getCreatedAt() {
+//////        return createdAt;
+//////    }
+//////    public void setCreatedAt(LocalDateTime createdAt) {
+//////        this.createdAt = createdAt;
+//////    }
+////}
+////////package com.zawadig.myafwanii.Model;
+////////
+////////import jakarta.persistence.*;
+////////import java.time.LocalDateTime;
+////////
+////////@Entity
+////////@Table(name = "notification")
+////////public class Notification {
+////////
+////////    @Id
+////////    @GeneratedValue(strategy = GenerationType.IDENTITY)
+////////    private Long id;
+////////
+////////    @Column(name = "customer_id")
+////////    private Long customerId;
+////////
+////////    private String title;
+////////    private String message;
+////////
+////////    @Column(name = "`read`") // Escape SQL keyword "read"
+////////    private boolean read = false;
+////////
+////////    @Column(name = "created_at")
+////////    private LocalDateTime createdAt;
+////////
+////////    @PrePersist
+////////    public void prePersist() {
+////////        this.createdAt = LocalDateTime.now();
+////////    }
+////////
+////////    // Getters & Setters
+////////    public Long getId() {
+////////        return id;
+////////    }
+////////    public void setId(Long id) {
+////////        this.id = id;
+////////    }
+////////
+////////    public Long getCustomerId() {
+////////        return customerId;
+////////    }
+////////    public void setCustomerId(Long customerId) {
+////////        this.customerId = customerId;
+////////    }
+////////
+////////    public String getTitle() {
+////////        return title;
+////////    }
+////////    public void setTitle(String title) {
+////////        this.title = title;
+////////    }
+////////
+////////    public String getMessage() {
+////////        return message;
+////////    }
+////////    public void setMessage(String message) {
+////////        this.message = message;
+////////    }
+////////
+////////    public boolean isRead() {
+////////        return read;
+////////    }
+////////    public void setRead(boolean read) {
+////////        this.read = read;
+////////    }
+////////
+////////    public LocalDateTime getCreatedAt() {
+////////        return createdAt;
+////////    }
+////////    public void setCreatedAt(LocalDateTime createdAt) {
+////////        this.createdAt = createdAt;
+////////    }
+////////}
+////////package com.zawadig.myafwanii.Model;
+////////
+////////import jakarta.persistence.*;
+////////import java.time.LocalDateTime;
+////////
+////////@Entity
+////////@Table(name = "notification")
+////////public class Notification {
+////////
+////////    @Id
+////////    @GeneratedValue(strategy = GenerationType.IDENTITY)
+////////    private Long id;
+////////
+////////    private String title;
+////////    private String message;
+////////
+////////    @Column(name = "`read`") // sababu 'read' ni keyword SQL, tunaitumia escaped
+////////    private boolean read = false;
+////////
+////////    @Column(name = "created_at")
+////////    private LocalDateTime createdAt;
+////////
+////////    @ManyToOne(fetch = FetchType.LAZY)
+////////    @JoinColumn(name = "customer_id")
+////////    private Customer customer;  // Hii ndio field muhimu
+////////
+////////    @PrePersist
+////////    public void prePersist() {
+////////        this.createdAt = LocalDateTime.now();
+////////    }
+////////
+////////    // Getters & Setters
+////////
+////////    public Long getId() {
+////////        return id;
+////////    }
+////////
+////////    public void setId(Long id) {
+////////        this.id = id;
+////////    }
+////////
+////////    public String getTitle() {
+////////        return title;
+////////    }
+////////
+////////    public void setTitle(String title) {
+////////        this.title = title;
+////////    }
+////////
+////////    public String getMessage() {
+////////        return message;
+////////    }
+////////
+////////    public void setMessage(String message) {
+////////        this.message = message;
+////////    }
+////////
+////////    public boolean isRead() {
+////////        return read;
+////////    }
+////////
+////////    public void setRead(boolean read) {
+////////        this.read = read;
+////////    }
+////////
+////////    public LocalDateTime getCreatedAt() {
+////////        return createdAt;
+////////    }
+////////
+////////    public void setCreatedAt(LocalDateTime createdAt) {
+////////        this.createdAt = createdAt;
+////////    }
+////////
+////////    public Customer getCustomer() {
+////////        return customer;
+////////    }
+////////
+////////    public void setCustomer(Customer customer) {
+////////        this.customer = customer;
+////////    }
+////////}
+//////package com.zawadig.myafwanii.Model;
+//////
+//////import jakarta.persistence.*;
+//////import java.time.LocalDateTime;
+//////
+//////@Entity
+//////@Table(name = "notification")
+//////public class Notification {
+//////
+//////    @Id
+//////    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//////    private Long id;
+//////
+//////    private String title;
+//////    private String message;
+//////
+//////    @Column(name = "`read`")
+//////    private boolean read = false;
+//////
+//////    @Column(name = "created_at")
+//////    private LocalDateTime createdAt;
+//////
+//////    @ManyToOne
+//////    @JoinColumn(name = "customer_id")  // Hii ni foreign key reference
+//////    private Customer customer;
+//////
+//////    @PrePersist
+//////    public void prePersist() {
+//////        this.createdAt = LocalDateTime.now();
+//////    }
+//////
+//////    // Getters & Setters
+//////
+//////    public Long getId() {
+//////        return id;
+//////    }
+//////    public void setId(Long id) {
+//////        this.id = id;
+//////    }
+//////
+//////    public String getTitle() {
+//////        return title;
+//////    }
+//////    public void setTitle(String title) {
+//////        this.title = title;
+//////    }
+//////
+//////    public String getMessage() {
+//////        return message;
+//////    }
+//////    public void setMessage(String message) {
+//////        this.message = message;
+//////    }
+//////
+//////    public boolean isRead() {
+//////        return read;
+//////    }
+//////    public void setRead(boolean read) {
+//////        this.read = read;
+//////    }
+//////
+//////    public LocalDateTime getCreatedAt() {
+//////        return createdAt;
+//////    }
+//////    public void setCreatedAt(LocalDateTime createdAt) {
+//////        this.createdAt = createdAt;
+//////    }
+//////
+//////    public Customer getCustomer() {
+//////        return customer;
+//////    }
+//////    public void setCustomer(Customer customer) {
+//////        this.customer = customer;
+//////    }
+//////}
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 ////package com.zawadig.myafwanii.Model;
-////
-////
-////
 ////
 ////import jakarta.persistence.*;
 ////import java.time.LocalDateTime;
 ////
 ////@Entity
+////@Table(name = "notifications")
 ////public class Notification {
 ////
 ////    @Id
 ////    @GeneratedValue(strategy = GenerationType.IDENTITY)
 ////    private Long id;
 ////
+////    @Column(name = "customer_id")
+////    private Long customerId;
+////
 ////    private String title;
 ////    private String message;
 ////
-////    @Column(name = "`read`")
+////    @Column(name = "is_read")
 ////    private boolean read = false;
 ////
-////    private LocalDateTime timestamp;
+////    @Column(name = "created_at")
+////    private LocalDateTime createdAt;
 ////
-////    @ManyToOne
-////    @JoinColumn(name = "customer_id")
-////    private Customer customer;
-////
-////    @PrePersist
-////    public void prePersist() {
-////        this.timestamp = LocalDateTime.now();
+////    // Constructors
+////    public Notification() {
 ////    }
 ////
-////    // Getters & Setters
+////    public Notification(Long customerId, String title, String message) {
+////        this.customerId = customerId;
+////        this.title = title;
+////        this.message = message;
+////        this.createdAt = LocalDateTime.now();
+////    }
 ////
+////    // Getters and Setters
 ////    public Long getId() {
 ////        return id;
+////    }
+////
+////    public void setId(Long id) {
+////        this.id = id;
+////    }
+////
+////    public Long getCustomerId() {
+////        return customerId;
+////    }
+////
+////    public void setCustomerId(Long customerId) {
+////        this.customerId = customerId;
 ////    }
 ////
 ////    public String getTitle() {
@@ -60,164 +639,162 @@
 ////        this.read = read;
 ////    }
 ////
-////    public LocalDateTime getTimestamp() {
-////        return timestamp;
+////    public LocalDateTime getCreatedAt() {
+////        return createdAt;
 ////    }
 ////
-////    public Customer getCustomer() {
-////        return customer;
-////    }
-////
-////    public void setCustomer(Customer customer) {
-////        this.customer = customer;
+////    public void setCreatedAt(LocalDateTime createdAt) {
+////        this.createdAt = createdAt;
 ////    }
 ////}
-//// Notification.java
+//
+//
+//
+//
+////package com.zawadig.myafwanii.Model;
+////
+////import jakarta.persistence.*;
+////import java.time.LocalDateTime;
+////
+////@Entity
+////@Table(name = "notifications")
+////public class Notification {
+////    @Id
+////    @GeneratedValue(strategy = GenerationType.IDENTITY)
+////    private Long id;
+////
+////    @Column(name = "customer_id")
+////    private Long customerId;
+////
+////    private String title;
+////    private String message;
+////
+////    @Column(name = "is_read")
+////    private boolean read = false;
+////
+////    @Column(name = "created_at")
+////    private LocalDateTime createdAt;
+////
+////    // Constructors
+////    public Notification() {}
+////
+////    // Getters and Setters
+////    public Long getId() { return id; }
+////    public void setId(Long id) { this.id = id; }
+////    public Long getCustomerId() { return customerId; }
+////    public void setCustomerId(Long customerId) { this.customerId = customerId; }
+////    public String getTitle() { return title; }
+////    public void setTitle(String title) { this.title = title; }
+////    public String getMessage() { return message; }
+////    public void setMessage(String message) { this.message = message; }
+////    public boolean isRead() { return read; }
+////    public void setRead(boolean read) { this.read = read; }
+////    public LocalDateTime getCreatedAt() { return createdAt; }
+////    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+////}
+//
+//
 //package com.zawadig.myafwanii.Model;
 //
 //import jakarta.persistence.*;
 //import java.time.LocalDateTime;
 //
 //@Entity
-//@Table(name = "notification")
+//@Table(name = "notifications")
 //public class Notification {
 //
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    private Long id;
 //
-//    @Column(name = "customer_id")
-//    private Long customerId;
+//    @ManyToOne
+//    @JoinColumn(name = "customer_id")
+//    private Customer customer;
 //
 //    private String title;
 //    private String message;
 //
-//    @Column(name = "`read`") // ✅ fix keyword issue
+//    @Column(name = "is_read")
 //    private boolean read = false;
 //
 //    @Column(name = "created_at")
-//    private LocalDateTime createdAt;
+//    private LocalDateTime createdAt = LocalDateTime.now();
 //
-//    // Getters & Setters
+//    // Constructors
+//    public Notification() {}
 //
-//    public Long getId() {
-//        return id;
-//    }
+//    // Getters and Setters
+//    public Long getId() { return id; }
+//    public void setId(Long id) { this.id = id; }
 //
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
+//    public Customer getCustomer() { return customer; }
+//    public void setCustomer(Customer customer) { this.customer = customer; }
 //
-//    public Long getCustomerId() {
-//        return customerId;
-//    }
+//    public String getTitle() { return title; }
+//    public void setTitle(String title) { this.title = title; }
 //
-//    public void setCustomerId(Long customerId) {
-//        this.customerId = customerId;
-//    }
+//    public String getMessage() { return message; }
+//    public void setMessage(String message) { this.message = message; }
 //
-//    public String getTitle() {
-//        return title;
-//    }
+//    public boolean isRead() { return read; }
+//    public void setRead(boolean read) { this.read = read; }
 //
-//    public void setTitle(String title) {
-//        this.title = title;
-//    }
-//
-//    public String getMessage() {
-//        return message;
-//    }
-//
-//    public void setMessage(String message) {
-//        this.message = message;
-//    }
-//
-//    public boolean isRead() {
-//        return read;
-//    }
-//
-//    public void setRead(boolean read) {
-//        this.read = read;
-//    }
-//
-//    public LocalDateTime getCreatedAt() {
-//        return createdAt;
-//    }
-//
-//    public void setCreatedAt(LocalDateTime createdAt) {
-//        this.createdAt = createdAt;
-//    }
+//    public LocalDateTime getCreatedAt() { return createdAt; }
+//    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 //}
+
+
 package com.zawadig.myafwanii.Model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "notification")
+@Table(name = "notifications")
 public class Notification {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customer_id", nullable = false)
 
-    @Column(name = "customer_id")
-    private Long customerId;
+    private Customer customer;
 
     private String title;
     private String message;
 
-    @Column(name = "`read`") // escape SQL keyword
+    @Column(name = "is_read")
     private boolean read = false;
 
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    @PrePersist
-    public void prePersist() {
-        this.createdAt = LocalDateTime.now();
-    }
+    // Constructors
+    public Notification() {}
 
-    // Getters & Setters
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getCustomerId() {
-        return customerId;
-    }
-    public void setCustomerId(Long customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-    public void setTitle(String title) {
+    public Notification(Customer customer, String title, String message) {
+        this.customer = customer;
         this.title = title;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-    public void setMessage(String message) {
         this.message = message;
     }
 
-    public boolean isRead() {
-        return read;
-    }
-    public void setRead(boolean read) {
-        this.read = read;
-    }
+    // Getters and Setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+    public Customer getCustomer() { return customer; }
+    public void setCustomer(Customer customer) { this.customer = customer; }
+
+    public String getTitle() { return title; }
+    public void setTitle(String title) { this.title = title; }
+
+    public String getMessage() { return message; }
+    public void setMessage(String message) { this.message = message; }
+
+    public boolean isRead() { return read; }
+    public void setRead(boolean read) { this.read = read; }
+
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }

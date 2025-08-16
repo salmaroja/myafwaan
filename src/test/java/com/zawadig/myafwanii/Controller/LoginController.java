@@ -1,4 +1,4 @@
-package com.zawadig.myafwanii.Controller;
+package com.zawadig.myafwanii.Controller;////package com.zawadig.myafwanii.Controller;
 
 import com.zawadig.myafwanii.Model.Customer;
 import com.zawadig.myafwanii.Repository.CustomerRepository;
@@ -38,3 +38,100 @@ public class LoginController {
         return ResponseEntity.ok(response);
     }
 }
+
+//
+//
+//
+//
+//
+//import com.zawadig.myafwanii.Model.Admin;
+//import com.zawadig.myafwanii.Model.Technician;
+//import com.zawadig.myafwanii.Repository.AdminRepository;
+//import com.zawadig.myafwanii.Repository.TechnicianRepository;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.web.bind.annotation.*;
+//
+//@RestController
+//@RequestMapping("/api")
+//public class LoginController {
+//
+//    @Autowired
+//    private AdminRepository adminRepository;
+//
+//    @Autowired
+//    private TechnicianRepository technicianRepository;
+//
+//    @PostMapping("/login")
+//    public ResponseEntity<?> login(
+//            @RequestParam String role,
+//            @RequestParam String email,
+//            @RequestParam String password) {
+//
+//        if ("admin".equalsIgnoreCase(role)) {
+//            Admin admin = adminRepository.findByEmail(email).orElse(null);
+//            if (admin != null && admin.getPassword().equals(password)) {
+//                return ResponseEntity.ok(admin);
+//            } else {
+//                return ResponseEntity.status(401).body("Admin credentials invalid");
+//            }
+//        } else if ("technician".equalsIgnoreCase(role)) {
+//            Technician tech = technicianRepository.findByEmail(email).orElse(null);
+//            if (tech != null && tech.getPassword().equals(password)) {
+//                return ResponseEntity.ok(tech);
+//            } else {
+//                return ResponseEntity.status(401).body("Technician credentials invalid");
+//            }
+//        } else {
+//            return ResponseEntity.badRequest().body("Role not supported");
+//        }
+//    }
+//}
+//
+////import com.zawadig.myafwanii.Model.Admin;
+////import com.zawadig.myafwanii.Model.Technician;
+////import com.zawadig.myafwanii.Repository.AdminRepository;
+////import com.zawadig.myafwanii.Repository.TechnicianRepository;
+////import org.springframework.beans.factory.annotation.Autowired;
+////import org.springframework.http.ResponseEntity;
+////import org.springframework.web.bind.annotation.*;
+////
+////@RestController
+////@RequestMapping("/api")
+////public class LoginController {
+////
+////    @Autowired
+////    private AdminRepository adminRepository;
+////
+////    @Autowired
+////    private TechnicianRepository technicianRepository;
+////
+////    @PostMapping("/login")
+////    public ResponseEntity<?> login(
+////            @RequestParam String role,
+////            @RequestParam String email,
+////            @RequestParam String password) {
+////
+////        if ("admin".equalsIgnoreCase(role)) {
+////            Admin admin = adminRepository.findByEmail(email).orElse(null);
+////            if (admin != null && ((Admin) admin).getPassword().equals(password)) {
+////                return ResponseEntity.ok().body("Admin login successful");
+////            } else {
+////                return ResponseEntity.status(401).body("Admin credentials invalid");
+////            }
+////        }
+////        else if ("technician".equalsIgnoreCase(role)) {
+////            Technician tech = technicianRepository.findByEmail(email).orElse(null);
+//            if (tech != null && tech.getPassword().equals(password)) {
+//                return ResponseEntity.ok().body("Technician login successful");
+//            } else {
+//                return ResponseEntity.status(401).body("Technician credentials invalid");
+//            }
+//        }
+//        else {
+//            return ResponseEntity.badRequest().body("Role not supported");
+//        }
+//    }
+//}
+//
+//

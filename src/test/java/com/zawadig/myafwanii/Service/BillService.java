@@ -60,6 +60,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -119,5 +120,9 @@ public class BillService {
 
         billRepository.save(bill);
     }
+
+//    public Map<String, Object> getCustomerUsageData(Long id) {
+//
+//    }
 }
 
